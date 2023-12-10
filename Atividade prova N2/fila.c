@@ -1,52 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ELEMENTOS_FILA 6
+int qretrieve();
+void qstore(int i);
 
-typedef struct{
-    int vetor[ELEMENTOS_FILA];
-    int fim;
-}fila;
+#define MAX 6
+int fila[MAX];
+int fim = 0;
+int inicio = 0;
 
-int main(){
-    int i;
-    fila f;
-    f.fim = 0;
+void main(){
+    qstore(64);
+    qstore(25);
+    qstore(12);
+    qstore(22);
+    qstore(11);
+    qstore(9);
 
-    //incluindo os numeros na fila
-    f.vetor[f.fim] = 25;
-    f.fim++;
-    
-    f.vetor[f.fim] = 64;
-    f.fim++;
-
-    f.vetor[f.fim] = 12;
-    f.fim++;
-    
-    f.vetor[f.fim] = 22;
-    f.fim++;
-
-    f.vetor[f.fim] = 11;
-    f.fim++;
-
-    f.vetor[f.fim] = 9;
-    f.fim++;
-  
-    for(int i = 0; i<(f.fim); i++){
-        printf("%02d ", f.vetor[i]);
-    }
-
-    //retirar da fila
-    printf("Numero que saiu da fila: %d\n", f.vetor[0]);
-
-    for(int i = 0; i<f.fim; i++){
-        f.vetor[i] = f.vetor[i+1];
-    }
-    f.fim--;
-
-    for(int i = 0; i<(f.fim); i++){
-        printf("%02d ", f.vetor[i]);
-    }
-    return 0;
-
+    qretrieve();
+    qretrieve();
+    qretrieve();
+    qretrieve();
+    qretrieve();
+    qretrieve();
 }
+
+ void qstore(int i){
+    if(fim == MAX){
+        printf("A fila esta cheia.\n");
+        return;
+    }
+
+    fila[fim] = i;
+    fim++;
+    printf("Enfileirando: %d\n", i);
+}
+
+int qretrieve(){
+    if(inicio == fim){
+        printf("A fila esta vazia.\n");
+    }
+
+    inicio++;
+    printf("Desenfileirando: %d\n", fila[inicio - 1]);
+    return fila [inicio - 1];
+}
+
